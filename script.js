@@ -5,25 +5,25 @@
 // ── Products data ──────────────────────────────────────────
 const products = [
     // STREAMING
-    { id:6,  name:"Netflix Premium – 30 dias",        category:"streaming", icon:"🎬", img:"Gemini_Generated_Image_jzifk1jzifk1jzif.png", badge:"hot",  badgeText:"Hot",  price:19.90,  oldPrice:45.90,  desc:"Acesso Netflix Premium com 4 telas simultâneas e qualidade 4K Ultra HD.", features:["4 telas simultâneas","Qualidade 4K Ultra HD","Todos os conteúdos","Funciona em todos dispositivos","Renovação disponível"] },
-    { id:7,  name:"HBO Max – 30 dias",                category:"streaming", icon:"📺", img:"HBO.jpg", badge:null,   badgeText:null,   price:17.90,  oldPrice:34.90,  desc:"Acesso HBO Max com séries exclusivas, filmes e conteúdo DC.", features:["Séries HBO exclusivas","Filmes DC e Warner","Qualidade Full HD","2 telas simultâneas","Suporte incluso"] },
-    { id:8,  name:"Disney+ – 30 dias",                category:"streaming", icon:"🏰", img:"Disney.jfif", badge:"new",  badgeText:"Novo", price:15.90,  oldPrice:27.90,  desc:"Acesso Disney+ com Marvel, Star Wars, Pixar e muito mais.", features:["Marvel completo","Star Wars","Pixar e Disney clássicos","National Geographic","4 telas simultâneas"] },
-    { id:9,  name:"Spotify Premium – 30 dias",        category:"streaming", icon:"🎵", img:"spotify.jfif", badge:null,   badgeText:null,   price:12.90,  oldPrice:21.90,  desc:"Spotify Premium sem anúncios, download offline e qualidade máxima.", features:["Sem anúncios","Download offline","Qualidade máxima","Pular músicas ilimitado","Funciona no celular"] },
+    { id:6,  name:"Netflix Premium – 30 dias",        category:"streaming", icon:"🎬", img:"Gemini_Generated_Image_jzifk1jzifk1jzif.png", stock:0,        badge:"hot",  badgeText:"Hot",  price:19.90,  oldPrice:45.90,  desc:"Acesso Netflix Premium com 4 telas simultâneas e qualidade 4K Ultra HD.", features:["4 telas simultâneas","Qualidade 4K Ultra HD","Todos os conteúdos","Funciona em todos dispositivos","Renovação disponível"] },
+    { id:7,  name:"HBO Max – 30 dias",                category:"streaming", icon:"📺", img:"HBO.jpg",                                      stock:0,        badge:null,   badgeText:null,   price:17.90,  oldPrice:34.90,  desc:"Acesso HBO Max com séries exclusivas, filmes e conteúdo DC.", features:["Séries HBO exclusivas","Filmes DC e Warner","Qualidade Full HD","2 telas simultâneas","Suporte incluso"] },
+    { id:8,  name:"Disney+ – 30 dias",                category:"streaming", icon:"🏰", img:"Disney.jfif",                                  stock:0,        badge:"new",  badgeText:"Novo", price:15.90,  oldPrice:27.90,  desc:"Acesso Disney+ com Marvel, Star Wars, Pixar e muito mais.", features:["Marvel completo","Star Wars","Pixar e Disney clássicos","National Geographic","4 telas simultâneas"] },
+    { id:9,  name:"Spotify Premium – 30 dias",        category:"streaming", icon:"🎵", img:"spotify.jfif",                                 stock:0,        badge:null,   badgeText:null,   price:12.90,  oldPrice:21.90,  desc:"Spotify Premium sem anúncios, download offline e qualidade máxima.", features:["Sem anúncios","Download offline","Qualidade máxima","Pular músicas ilimitado","Funciona no celular"] },
     // PC
-    { id:11, name:"Otimização PC – Básica",           category:"pc",        icon:"⚡", img:"Otimiza%C3%A7%C3%A3o%20PC%20%E2%80%93%20B%C3%A1sica.jfif", badge:null,   badgeText:null,   price:29.90,  oldPrice:null,   desc:"Limpeza de arquivos temporários, otimização de inicialização e ajustes de desempenho.", features:["Limpeza completa","Otimização de boot","Remoção de vírus","Relatório detalhado","Suporte pós-serviço"] },
-    { id:12, name:"Otimização PC – Gamer",            category:"pc",        icon:"🖥️", img:"Otimiza%C3%A7%C3%A3o%20PC%20%E2%80%93%20Gamer.jfif", badge:"hot",  badgeText:"Hot",  price:59.90,  oldPrice:89.90,  desc:"Otimização completa focada em jogos: FPS, latência e desempenho máximo.", features:["Boost de FPS garantido","Redução de latência","Configuração de rede","Overclock seguro","Suporte 7 dias"] },
+    { id:11, name:"Otimização PC – Básica",           category:"pc",        icon:"⚡", img:"Otimiza%C3%A7%C3%A3o%20PC%20%E2%80%93%20B%C3%A1sica.jfif", stock:0, badge:null,   badgeText:null,   price:29.90,  oldPrice:null,   desc:"Limpeza de arquivos temporários, otimização de inicialização e ajustes de desempenho.", features:["Limpeza completa","Otimização de boot","Remoção de vírus","Relatório detalhado","Suporte pós-serviço"] },
+    { id:12, name:"Otimização PC – Gamer",            category:"pc",        icon:"🖥️", img:"Otimiza%C3%A7%C3%A3o%20PC%20%E2%80%93%20Gamer.jfif",        stock:0, badge:"hot",  badgeText:"Hot",  price:59.90,  oldPrice:89.90,  desc:"Otimização completa focada em jogos: FPS, latência e desempenho máximo.", features:["Boost de FPS garantido","Redução de latência","Configuração de rede","Overclock seguro","Suporte 7 dias"] },
     // INTELIGÊNCIA ARTIFICIAL
-    { id:25, name:"Chat GPT Plus",                        category:"ia",        icon:"🧠", img:"Chat%20GPT%20plus.jfif",                          badge:"hot",  badgeText:"Hot",  price:11.99,  oldPrice:null,   desc:"Acesso ao ChatGPT Plus com GPT-4, respostas mais rápidas e recursos exclusivos.", features:["Acesso ao GPT-4","Respostas prioritárias","Plugins disponíveis","Sem limite de uso","Entrega imediata"] },
-    { id:26, name:"Super Grok",                           category:"ia",        icon:"⚡", img:"Super%20Grok.jfif",                                badge:"new",  badgeText:"Novo", price:8.99,   oldPrice:null,   desc:"Acesso ao Super Grok com todos os recursos premium desbloqueados.", features:["Acesso completo","Respostas avançadas","Sem restrições","Alta velocidade","Entrega imediata"] },
-    { id:27, name:"Perplexity AI",                        category:"ia",        icon:"🔍", img:"Perplexity%20AI.jfif",                             badge:null,   badgeText:null,   price:9.99,   oldPrice:null,   desc:"Perplexity AI premium com pesquisas ilimitadas e respostas com fontes verificadas.", features:["Pesquisas ilimitadas","Fontes verificadas","Modo Pro ativo","Respostas detalhadas","Entrega imediata"] },
-    { id:28, name:"Leonardo AI – Plano Essential",        category:"ia",        icon:"🎨", img:"Leonardo%20AI%20%E2%80%93%20Plano%20Essential.jfif", badge:null,   badgeText:null,   price:10.99,  oldPrice:null,   desc:"Leonardo AI no plano Essential para geração de imagens com IA de alta qualidade.", features:["Geração de imagens IA","Plano Essential","Alta resolução","Modelos exclusivos","Entrega imediata"] },
-    { id:29, name:"Gemini Enterprise",                    category:"ia",        icon:"💎", img:"Gemini%20Enterprise.jfif",                         badge:"hot",  badgeText:"Hot",  price:5.99,   oldPrice:null,   desc:"Acesso ao Gemini Enterprise do Google com todos os recursos avançados liberados.", features:["Gemini Enterprise","Recursos avançados","Integração Google","Alta performance","Entrega imediata"] },
+    { id:25, name:"Chat GPT Plus",                    category:"ia",        icon:"🧠", img:"Chat%20GPT%20plus.jfif",                          stock:0,        badge:"hot",  badgeText:"Hot",  price:11.99,  oldPrice:null,   desc:"Acesso ao ChatGPT Plus com GPT-4, respostas mais rápidas e recursos exclusivos.", features:["Acesso ao GPT-4","Respostas prioritárias","Plugins disponíveis","Sem limite de uso","Entrega imediata"] },
+    { id:26, name:"Super Grok",                       category:"ia",        icon:"⚡", img:"Super%20Grok.jfif",                                stock:0,        badge:"new",  badgeText:"Novo", price:8.99,   oldPrice:null,   desc:"Acesso ao Super Grok com todos os recursos premium desbloqueados.", features:["Acesso completo","Respostas avançadas","Sem restrições","Alta velocidade","Entrega imediata"] },
+    { id:27, name:"Perplexity AI",                    category:"ia",        icon:"🔍", img:"Perplexity%20AI.jfif",                             stock:0,        badge:null,   badgeText:null,   price:9.99,   oldPrice:null,   desc:"Perplexity AI premium com pesquisas ilimitadas e respostas com fontes verificadas.", features:["Pesquisas ilimitadas","Fontes verificadas","Modo Pro ativo","Respostas detalhadas","Entrega imediata"] },
+    { id:28, name:"Leonardo AI – Plano Essential",    category:"ia",        icon:"🎨", img:"Leonardo%20AI%20%E2%80%93%20Plano%20Essential.jfif", stock:0,       badge:null,   badgeText:null,   price:10.99,  oldPrice:null,   desc:"Leonardo AI no plano Essential para geração de imagens com IA de alta qualidade.", features:["Geração de imagens IA","Plano Essential","Alta resolução","Modelos exclusivos","Entrega imediata"] },
+    { id:29, name:"Gemini Enterprise",                category:"ia",        icon:"💎", img:"Gemini%20Enterprise.jfif",                         stock:0,        badge:"hot",  badgeText:"Hot",  price:5.99,   oldPrice:null,   desc:"Acesso ao Gemini Enterprise do Google com todos os recursos avançados liberados.", features:["Gemini Enterprise","Recursos avançados","Integração Google","Alta performance","Entrega imediata"] },
     // FIVE M
-    { id:24, name:"Pack PaintBall + Mod Som",             category:"fivem",     icon:"🎯", img:"Pack%20paintball.jpg", badge:"new",  badgeText:"Novo", price:10.00,  oldPrice:null, payLink:"https://mpago.la/25T8eFU", deliveryLink:"https://www.mediafire.com/file/xablzhs00owq9z4/PaintBall_WS.zip/file", desc:"Pack completo com PaintBall e Mod de Som para FiveM. Instalação simples e suporte incluso.", features:["PaintBall completo","Mod de Som incluso","Compatível com FiveM","Fácil instalação","Suporte pós-venda"] },
+    { id:24, name:"Pack PaintBall + Mod Som",         category:"fivem",     icon:"🎯", img:"Pack%20paintball.jpg", stock:Infinity, badge:"new",  badgeText:"Novo", price:10.00,  oldPrice:null, payLink:"https://mpago.la/25T8eFU", deliveryLink:"https://www.mediafire.com/file/xablzhs00owq9z4/PaintBall_WS.zip/file", desc:"Pack completo com PaintBall e Mod de Som para FiveM. Instalação simples e suporte incluso.", features:["PaintBall completo","Mod de Som incluso","Compatível com FiveM","Fácil instalação","Suporte pós-venda"] },
     // EDIÇÃO PREMIUM
-    { id:21, name:"Canva PRO",                            category:"edicao",    icon:"🎨", img:"Canva%20PRO.jfif", badge:"hot",  badgeText:"Hot",  price:5.00,   oldPrice:null,   desc:"Acesso ao Canva PRO com todos os recursos premium desbloqueados.", features:["Todos os templates PRO","Remoção de fundo ilimitada","Exportação sem marca d'água","Armazenamento em nuvem","Entrega imediata"] },
-    { id:22, name:"CapCut PRO – 30/35 dias",              category:"edicao",    icon:"🎬", img:"capcut.jfif", badge:"new",  badgeText:"Novo", price:9.50,   oldPrice:null,   desc:"CapCut PRO por 30 a 35 dias com todos os efeitos e ferramentas desbloqueadas.", features:["Efeitos PRO desbloqueados","Sem marca d'água","Filtros exclusivos","Edição avançada","Entrega imediata"] },
-    { id:23, name:"Alight Motion PRO – 1 Ano Individual", category:"edicao",    icon:"✨", img:"ALIGHT%20MOTION%20PRO.jfif", badge:"new",  badgeText:"Novo", price:19.00,  oldPrice:null,   desc:"Alight Motion PRO por 1 ano no plano individual com todos os recursos liberados.", features:["Plano individual 1 ano","Todos os efeitos desbloqueados","Exportação em alta qualidade","Sem marca d'água","Suporte incluso"] },
+    { id:21, name:"Canva PRO",                        category:"edicao",    icon:"🎨", img:"Canva%20PRO.jfif",            stock:0,        badge:"hot",  badgeText:"Hot",  price:5.00,   oldPrice:null,   desc:"Acesso ao Canva PRO com todos os recursos premium desbloqueados.", features:["Todos os templates PRO","Remoção de fundo ilimitada","Exportação sem marca d'água","Armazenamento em nuvem","Entrega imediata"] },
+    { id:22, name:"CapCut PRO – 30/35 dias",          category:"edicao",    icon:"🎬", img:"capcut.jfif",                 stock:0,        badge:"new",  badgeText:"Novo", price:9.50,   oldPrice:null,   desc:"CapCut PRO por 30 a 35 dias com todos os efeitos e ferramentas desbloqueadas.", features:["Efeitos PRO desbloqueados","Sem marca d'água","Filtros exclusivos","Edição avançada","Entrega imediata"] },
+    { id:23, name:"Alight Motion PRO – 1 Ano",        category:"edicao",    icon:"✨", img:"ALIGHT%20MOTION%20PRO.jfif",  stock:0,        badge:"new",  badgeText:"Novo", price:19.00,  oldPrice:null,   desc:"Alight Motion PRO por 1 ano no plano individual com todos os recursos liberados.", features:["Plano individual 1 ano","Todos os efeitos desbloqueados","Exportação em alta qualidade","Sem marca d'água","Suporte incluso"] },
 ];
 
 // ── State ──────────────────────────────────────────────────
@@ -59,8 +59,16 @@ function renderProducts() {
 
     empty.style.display = 'none';
 
-    grid.innerHTML = list.map(p => `
-        <article class="product-card" onclick="openModal(${p.id})" role="button" tabindex="0" aria-label="${p.name}">
+    grid.innerHTML = list.map(p => {
+        const outOfStock = p.stock === 0;
+        const stockLabel = outOfStock
+            ? `<span class="stock-badge out">⛔ Sem estoque</span>`
+            : p.stock === Infinity
+                ? `<span class="stock-badge inf">∞ Disponível</span>`
+                : `<span class="stock-badge ok">✦ ${p.stock} no estoque</span>`;
+
+        return `
+        <article class="product-card ${outOfStock ? 'out-of-stock' : ''}" onclick="${outOfStock ? '' : `openModal(${p.id})`}" role="button" tabindex="0" aria-label="${p.name}">
             ${p.badge ? `<span class="product-badge badge-${p.badge}">${p.badgeText}</span>` : ''}
             <div class="product-img-wrap">
                 ${p.img
@@ -69,28 +77,30 @@ function renderProducts() {
                 <div class="product-img" style="background:var(--card-2);display:${p.img ? 'none' : 'flex'};align-items:center;justify-content:center;font-size:3.5rem;height:160px;">
                     ${p.icon}
                 </div>
+                ${outOfStock ? `<div class="out-of-stock-overlay">⛔ Sem Estoque</div>` : ''}
             </div>
             <div class="product-body">
                 <div class="product-category">${getCategoryLabel(p.category)}</div>
                 <div class="product-name">${p.name}</div>
                 <div class="product-desc">${p.desc}</div>
+                <div class="stock-row">${stockLabel}</div>
                 <div class="product-footer">
                     <div class="product-price-wrap">
                         ${p.oldPrice ? `<span class="product-price-old">${fmt(p.oldPrice)}</span>` : ''}
                         <span class="product-price">${fmt(p.price)}</span>
                     </div>
                     <div class="product-btns">
-                        <button class="btn-buy" onclick="event.stopPropagation(); buyNow(${p.id})" aria-label="Comprar ${p.name}">
-                            Comprar
+                        <button class="btn-buy" onclick="event.stopPropagation(); buyNow(${p.id})" ${outOfStock ? 'disabled' : ''} aria-label="Comprar ${p.name}">
+                            ${outOfStock ? 'Sem estoque' : 'Comprar'}
                         </button>
-                        <button class="btn-add-cart" onclick="event.stopPropagation(); addToCart(${p.id})" aria-label="Adicionar ${p.name} ao carrinho" title="Adicionar ao carrinho">
+                        <button class="btn-add-cart" onclick="event.stopPropagation(); addToCart(${p.id})" ${outOfStock ? 'disabled' : ''} aria-label="Adicionar ao carrinho" title="Adicionar ao carrinho">
                             🛒
                         </button>
                     </div>
                 </div>
             </div>
         </article>
-    `).join('');
+    `}).join('');
 
     // Keyboard support for cards
     grid.querySelectorAll('.product-card').forEach(card => {
