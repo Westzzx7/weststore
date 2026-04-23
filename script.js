@@ -202,7 +202,8 @@ function openPayModal(p) {
                 <button class="btn-confirm-pay" id="btnConfirm" onclick="onConfirmPay(${p.id})" disabled>
                     ✓ Já efetuei o pagamento
                 </button>
-                <p class="pay-hint" id="payHint">Clique em "Pagar" primeiro para liberar a confirmação.</p>
+                <p class="pay-hint" id="payHint">Clique em "Pagar" para liberar a confirmação.</p>
+                <p class="pay-counter" id="payCounter" style="display:none"></p>
             </div>
 
             <div class="pay-delivery" id="payDelivery" style="display:none">
@@ -222,17 +223,31 @@ function openPayModal(p) {
 }
 
 let payClicked = false;
+let payTimer = null;
+
 function onPayClick() {
     payClicked = true;
-    setTimeout(() => {
-        const btn = document.getElementById('btnConfirm');
-        const hint = document.getElementById('payHint');
-        if (btn) {
+    const btn  = document.getElementById('btnConfirm');
+    const hint = document.getElementById('payHint');
+    const counter = document.getElementById('payCounter');
+    if (!btn) return;
+
+    let seconds = 30;
+
+    if (counter) counter.style.display = 'block';
+    if (hint) hint.textContent = '';
+
+    payTimer = setInterval(() => {
+        seconds--;
+        if (counter) counter.textContent = `Aguarde ${seconds}s para confirmar...`;
+
+        if (seconds <= 0) {
+            clearInterval(payTimer);
             btn.disabled = false;
-            btn.style.opacity = '1';
+            if (counter) counter.textContent = '✓ Pronto! Clique no botão acima para confirmar.';
+            if (counter) counter.style.color = 'var(--green)';
         }
-        if (hint) hint.textContent = 'Após concluir o pagamento, clique no botão acima.';
-    }, 3000);
+    }, 1000);
 }
 
 function onConfirmPay(id) {
@@ -256,6 +271,7 @@ function closePayModal() {
     document.getElementById('payModalOverlay').classList.remove('active');
     document.body.style.overflow = '';
     payClicked = false;
+    if (payTimer) { clearInterval(payTimer); payTimer = null; }
 }
 
 function addToCart(id) {
