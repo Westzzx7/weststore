@@ -168,7 +168,12 @@ function openPayModal(p) {
     content.innerHTML = `
         <div class="pay-modal">
             <div class="pay-modal-header">
-                <div class="pay-modal-icon">${p.icon}</div>
+                <div class="pay-modal-icon">
+                    ${p.img
+                        ? `<img src="${p.img}" alt="${p.name}" style="width:56px;height:56px;object-fit:cover;border-radius:10px;">`
+                        : p.icon
+                    }
+                </div>
                 <div>
                     <div class="pay-modal-title">${p.name}</div>
                     <div class="pay-modal-price">${fmt(p.price)}</div>
