@@ -19,7 +19,7 @@ const products = [
     { id:28, name:"Leonardo AI – Plano Essential",        category:"ia",        icon:"🎨", img:"Leonardo%20AI%20%E2%80%93%20Plano%20Essential.jfif", badge:null,   badgeText:null,   price:10.99,  oldPrice:null,   desc:"Leonardo AI no plano Essential para geração de imagens com IA de alta qualidade.", features:["Geração de imagens IA","Plano Essential","Alta resolução","Modelos exclusivos","Entrega imediata"] },
     { id:29, name:"Gemini Enterprise",                    category:"ia",        icon:"💎", img:"Gemini%20Enterprise.jfif",                         badge:"hot",  badgeText:"Hot",  price:5.99,   oldPrice:null,   desc:"Acesso ao Gemini Enterprise do Google com todos os recursos avançados liberados.", features:["Gemini Enterprise","Recursos avançados","Integração Google","Alta performance","Entrega imediata"] },
     // FIVE M
-    { id:24, name:"Pack PaintBall + Mod Som",             category:"fivem",     icon:"🎯", img:"Pack%20paintball.jpg", badge:"new",  badgeText:"Novo", price:10.00,  oldPrice:null,   desc:"Pack completo com PaintBall e Mod de Som para FiveM. Instalação simples e suporte incluso.", features:["PaintBall completo","Mod de Som incluso","Compatível com FiveM","Fácil instalação","Suporte pós-venda"] },
+    { id:24, name:"Pack PaintBall + Mod Som",             category:"fivem",     icon:"🎯", img:"Pack%20paintball.jpg", badge:"new",  badgeText:"Novo", price:10.00,  oldPrice:null, payLink:"https://mpago.la/25T8eFU", deliveryLink:"https://www.mediafire.com/file/xablzhs00owq9z4/PaintBall_WS.zip/file", desc:"Pack completo com PaintBall e Mod de Som para FiveM. Instalação simples e suporte incluso.", features:["PaintBall completo","Mod de Som incluso","Compatível com FiveM","Fácil instalação","Suporte pós-venda"] },
     // EDIÇÃO PREMIUM
     { id:21, name:"Canva PRO",                            category:"edicao",    icon:"🎨", img:"Canva%20PRO.jfif", badge:"hot",  badgeText:"Hot",  price:5.00,   oldPrice:null,   desc:"Acesso ao Canva PRO com todos os recursos premium desbloqueados.", features:["Todos os templates PRO","Remoção de fundo ilimitada","Exportação sem marca d'água","Armazenamento em nuvem","Entrega imediata"] },
     { id:22, name:"CapCut PRO – 30/35 dias",              category:"edicao",    icon:"🎬", img:"capcut.jfif", badge:"new",  badgeText:"Novo", price:9.50,   oldPrice:null,   desc:"CapCut PRO por 30 a 35 dias com todos os efeitos e ferramentas desbloqueadas.", features:["Efeitos PRO desbloqueados","Sem marca d'água","Filtros exclusivos","Edição avançada","Entrega imediata"] },
@@ -150,8 +150,112 @@ function closeModal() {
 function buyNow(id) {
     const p = products.find(x => x.id === id);
     if (!p) return;
+
+    if (p.payLink) {
+        openPayModal(p);
+        return;
+    }
+
     const msg = encodeURIComponent(`Olá! Quero comprar:\n\n${p.name}\nValor: ${fmt(p.price)}`);
     window.open(`https://wa.me/5571982616245?text=${msg}`, '_blank');
+}
+
+// ── Pay Modal ──────────────────────────────────────────────
+function openPayModal(p) {
+    const overlay = document.getElementById('payModalOverlay');
+    const content = document.getElementById('payModalContent');
+
+    content.innerHTML = `
+        <div class="pay-modal">
+            <div class="pay-modal-header">
+                <div class="pay-modal-icon">${p.icon}</div>
+                <div>
+                    <div class="pay-modal-title">${p.name}</div>
+                    <div class="pay-modal-price">${fmt(p.price)}</div>
+                </div>
+            </div>
+
+            <div class="pay-steps">
+                <div class="pay-step active" id="step1">
+                    <div class="pay-step-num">1</div>
+                    <span>Efetue o pagamento</span>
+                </div>
+                <div class="pay-step-line"></div>
+                <div class="pay-step" id="step2">
+                    <div class="pay-step-num">2</div>
+                    <span>Confirme o pagamento</span>
+                </div>
+                <div class="pay-step-line"></div>
+                <div class="pay-step" id="step3">
+                    <div class="pay-step-num">3</div>
+                    <span>Receba o produto</span>
+                </div>
+            </div>
+
+            <div class="pay-body" id="payBody">
+                <p class="pay-info">Clique no botão abaixo para efetuar o pagamento via <strong>Pix ou Cartão</strong> pelo Mercado Pago.</p>
+                <a href="${p.payLink}" target="_blank" class="btn-pay-mp" id="btnPay" onclick="onPayClick()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+                    Pagar R$ ${p.price.toFixed(2).replace('.',',')} agora
+                </a>
+                <div class="pay-divider">Após pagar</div>
+                <button class="btn-confirm-pay" id="btnConfirm" onclick="onConfirmPay(${p.id})" disabled>
+                    ✓ Já efetuei o pagamento
+                </button>
+                <p class="pay-hint" id="payHint">Clique em "Pagar" primeiro para liberar a confirmação.</p>
+            </div>
+
+            <div class="pay-delivery" id="payDelivery" style="display:none">
+                <div class="pay-success-icon">✅</div>
+                <h3>Pagamento confirmado!</h3>
+                <p>Seu produto está pronto. Clique para baixar:</p>
+                <a href="${p.deliveryLink}" target="_blank" class="btn-download">
+                    ⬇️ Baixar ${p.name}
+                </a>
+                <p class="pay-hint">Guarde este link. Em caso de dúvidas, fale conosco no WhatsApp.</p>
+            </div>
+        </div>
+    `;
+
+    overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+let payClicked = false;
+function onPayClick() {
+    payClicked = true;
+    setTimeout(() => {
+        const btn = document.getElementById('btnConfirm');
+        const hint = document.getElementById('payHint');
+        if (btn) {
+            btn.disabled = false;
+            btn.style.opacity = '1';
+        }
+        if (hint) hint.textContent = 'Após concluir o pagamento, clique no botão acima.';
+    }, 3000);
+}
+
+function onConfirmPay(id) {
+    const p = products.find(x => x.id === id);
+    if (!p) return;
+
+    // Atualiza steps
+    document.getElementById('step1').classList.remove('active');
+    document.getElementById('step1').classList.add('done');
+    document.getElementById('step2').classList.add('done');
+    document.getElementById('step3').classList.add('active');
+
+    // Mostra entrega
+    document.getElementById('payBody').style.display = 'none';
+    document.getElementById('payDelivery').style.display = 'flex';
+
+    showToast('✅ Pagamento confirmado! Produto liberado.');
+}
+
+function closePayModal() {
+    document.getElementById('payModalOverlay').classList.remove('active');
+    document.body.style.overflow = '';
+    payClicked = false;
 }
 
 function addToCart(id) {
@@ -323,11 +427,18 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Pay modal close
+    document.getElementById('payModalClose').addEventListener('click', closePayModal);
+    document.getElementById('payModalOverlay').addEventListener('click', e => {
+        if (e.target === document.getElementById('payModalOverlay')) closePayModal();
+    });
+
     // ESC key
     document.addEventListener('keydown', e => {
         if (e.key === 'Escape') {
             closeModal();
             closeCart();
+            closePayModal();
             nav.classList.remove('open');
         }
     });
